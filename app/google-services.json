@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "554024985018",
+    "project_id": "authentication-2d45c",
+    "storage_bucket": "authentication-2d45c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554024985018:android:3379f24a280fb3edb7fd83",
+        "android_client_info": {
+          "package_name": "com.skyboundapps.authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554024985018-792nlg2cnahg889g6p25egqv7jaqtchk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWBaBcaQb_UFNxCfLr8FpHICxj2um3-zQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554024985018-792nlg2cnahg889g6p25egqv7jaqtchk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
