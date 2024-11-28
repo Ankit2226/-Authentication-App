@@ -1,6 +1,5 @@
 package com.skyboundapps.authentication
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -35,30 +34,75 @@ class SignupActivity : AppCompatActivity() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         // Set up button listeners
         binding.googlesignbtn.setOnClickListener {
             signInWithGoogle()
         }
-
         binding.facebooksignupbtn.setOnClickListener {
             signInWithFacebook()
         }
-
         binding.phonesignupbtn.setOnClickListener {
             val intent = Intent(this, phoneSignupActivity::class.java)
             startActivity(intent)
         }
-
         binding.githubsignupbtn.setOnClickListener {
             signInWithGitHub()
         }
-
         binding.logintextview.setOnClickListener {
             val intent = Intent(this, loginActivity::class.java)
             startActivity(intent)
+        }
+
+        // Handle email-password signup
+        binding.emailSignupButton.setOnClickListener {
+            val email = binding.emailEditText.text.toString().trim()
+            val password = binding.passwordEditText.text.toString().trim()
+
+            if (validateInputs(email, password)) {
+                registerUserWithEmail(email, password)
+            }
+        }
+    }
+
+    // Email-Password Signup Logic
+    private fun registerUserWithEmail(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Signup successful
+                    Log.d("SignupActivity", "createUserWithEmail:success")
+                    Toast.makeText(this, "Signup successful!", Toast.LENGTH_SHORT).show()
+
+                    // Redirect to main activity
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    // Signup failed
+                    Log.w("SignupActivity", "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(this, "Signup failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    // Validate email and password inputs
+    private fun validateInputs(email: String, password: String): Boolean {
+        return when {
+            email.isEmpty() -> {
+                binding.emailEditText.error = "Email is required"
+                false
+            }
+            password.isEmpty() -> {
+                binding.passwordEditText.error = "Password is required"
+                false
+            }
+            password.length < 6 -> {
+                binding.passwordEditText.error = "Password must be at least 6 characters"
+                false
+            }
+            else -> true
         }
     }
 
@@ -71,7 +115,6 @@ class SignupActivity : AppCompatActivity() {
     // Handle the result of the Google Sign-In intent
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -93,6 +136,7 @@ class SignupActivity : AppCompatActivity() {
                     // Sign in success
                     Log.d("SignupActivity", "signInWithCredential:success")
                     Toast.makeText(this, "Sign-in successful!", Toast.LENGTH_SHORT).show()
+
                     // Redirect to main activity
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)

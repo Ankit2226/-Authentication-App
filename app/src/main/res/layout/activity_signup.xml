@@ -11,21 +11,12 @@
     android:background="#F9F9F9"
     tools:context=".SignupActivity">
 
-    <!-- App Logo -->
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/logo"
-        android:contentDescription="App Logo" />
-
     <!-- App Name Text -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="Authentication App"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -98,6 +89,49 @@
             android:contentDescription="GitHub Sign-in" />
     </LinearLayout>
 
+    <!-- Email Signup Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_horizontal">
+
+        <!-- Email Input -->
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Email"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="8dp"
+            android:padding="12dp"
+            android:background="@drawable/edittextbg" />
+
+        <!-- Password Input -->
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your Password"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:background="@drawable/edittextbg" />
+
+        <!-- Sign-up Button -->
+        <Button
+            android:id="@+id/emailSignupButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign up with Email"
+            android:textAllCaps="false"
+            android:backgroundTint="#0056b3"
+            android:textColor="#FFFFFF"
+            android:padding="12dp" />
+    </LinearLayout>
+
     <!-- Login Redirect Text -->
     <TextView
         android:id="@+id/logintextview"
@@ -111,5 +145,4 @@
         android:textStyle="italic"
         android:paddingTop="16dp"
         android:paddingBottom="32dp" />
-
 </LinearLayout>
